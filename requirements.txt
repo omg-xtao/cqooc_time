@@ -1,0 +1,4 @@
+httpx==0.23.0
+coloredlogs==15.0.1
+Js2Py==0.71
+openpyxl==3.0.10
