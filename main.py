@@ -8,8 +8,6 @@ from model.course import get_course_list, print_course_list
 from model.exam import get_exam_list
 from model.task import get_task_list
 
-from config import username, password, sid
-
 logs = getLogger(__name__)
 logging_format = "%(levelname)s [%(asctime)s] [%(name)s] %(message)s"
 logging_handler = StreamHandler()
@@ -20,7 +18,8 @@ root_logger.addHandler(logging_handler)
 basicConfig(level=INFO)
 logs.setLevel(INFO)
 
-core = Core(username, password)
+core = Core("", "")
+sid = input("请输入 sid：")
 core.login_use_sid(sid)
 # 获取课程列表
 courses = core.get_course()
