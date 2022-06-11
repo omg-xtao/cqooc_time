@@ -149,7 +149,7 @@ class Core:
 
     def get_exam_info(self, course_id: str) -> dict:
         exam_list_res = self.__request.do_get(
-            self.__api_url.exam_list_api(course_id),
+            self.__api_url.exam_paper_api(course_id),
             headers={
                 "Referer": "http://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
@@ -157,6 +157,18 @@ class Core:
         )
         return Msg().processing(
             "获取测验列表成功", 200, exam_list_res.json()
+        )
+
+    def get_exam_main_info(self, course_id: str) -> dict:
+        exam_list_res = self.__request.do_get(
+            self.__api_url.exam_main_api(course_id),
+            headers={
+                "Referer": f"http://www.cqooc.com/learn/mooc/structure?id={course_id}",
+                "Host": "www.cqooc.com",
+            },
+        )
+        return Msg().processing(
+            "获取考试列表成功", 200, exam_list_res.json()
         )
 
     def get_task_info(self, course_id: str) -> dict:

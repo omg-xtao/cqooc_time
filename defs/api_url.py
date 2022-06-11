@@ -64,9 +64,16 @@ class ApiUrl:
             + f"&ts={self.__get_ts()}"
         )
 
-    def exam_list_api(self, course_id: str) -> str:
+    def exam_paper_api(self, course_id: str) -> str:
         return (
             "http://www.cqooc.com/json/exam/papers"
+            + f"?limit=200&start=1&courseId={course_id}&select=id,title,parentId,submitEnd"
+              f"&ts={self.__get_ts()}"
+        )
+
+    def exam_main_api(self, course_id: str) -> str:
+        return (
+            "http://www.cqooc.com/json/exams"
             + f"?limit=200&start=1&courseId={course_id}&select=id,title,parentId,submitEnd"
               f"&ts={self.__get_ts()}"
         )
