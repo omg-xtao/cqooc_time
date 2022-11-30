@@ -194,3 +194,33 @@ class Core:
         return Msg().processing(
             "获取章节列表成功", 200, chapter_list_res.json()
         )
+
+    def get_paper_answer(self, course_id: str, paper_id: str) -> dict:
+        paper_res = self.__request.do_get(
+            self.__api_url.paper_answer_api(paper_id),
+            headers={
+                "Referer": f'http://www.cqooc.com/learn/mooc/testing/do?tid='
+                           f'{paper_id}&id={course_id}',
+                "Host": "www.cqooc.com",
+            },
+        )
+        return Msg().processing(
+            "获取答案成功", 200, paper_res.json()
+        )
+
+    def get_paper_info(self, course_id: str, paper_id: str) -> dict:
+        paper_res = self.__request.do_get(
+            self.__api_url.paper_info_api(paper_id),
+            headers={
+                "Referer": f'http://www.cqooc.com/learn/mooc/testing/do?tid='
+                           f'{paper_id}&id={course_id}',
+                "Host": "www.cqooc.com",
+            },
+        )
+        try:
+            paper_res.json()
+        except Exception as e:
+            print(paper_res)
+        return Msg().processing(
+            "获取成功", 200, paper_res.json()
+        )

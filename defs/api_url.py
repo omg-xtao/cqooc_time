@@ -9,25 +9,25 @@ class ApiUrl:
         return int(time.time() * 1000)
 
     def id_api(self, xsid: str) -> str:
-        return f"http://www.cqooc.com/user/session?xsid={xsid}&ts={self.__get_ts()}"
+        return f"https://www.cqooc.com/user/session?xsid={xsid}&ts={self.__get_ts()}"
 
     def info_api(self) -> str:
-        return f"http://www.cqooc.com/account/session/api/profile/get?ts={self.__get_ts()}"
+        return f"https://www.cqooc.com/account/session/api/profile/get?ts={self.__get_ts()}"
 
     def get_nonce_api(self):
-        return f"http://www.cqooc.com/user/login?ts={self.__get_ts()}"
+        return f"https://www.cqooc.com/user/login?ts={self.__get_ts()}"
 
     @staticmethod
     def login_api(username: str, hash_str: str, nonce: str, cn: str) -> str:
         return (
-            "http://www.cqooc.com/user/login"
+            "https://www.cqooc.com/user/login"
             + f"?username={username}&password={hash_str}"
             + f"&nonce={nonce}&cnonce={cn}"
         )
 
     def course_api(self, ownerId: str, limit: int) -> str:
         return (
-            "http://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
+            "https://www.cqooc.com/json/mcs?sortby=id&reverse=true&del=2"
             + f"&courseType=2&ownerId={ownerId}&limit={limit}"
             + f"&ts={self.__get_ts()}"
         )
@@ -36,7 +36,7 @@ class ApiUrl:
         self, course_id: str, start: int = 0, limit: int = 100
     ) -> str:
         return (
-            "http://www.cqooc.com/json/mooc/lessons"
+            "https://www.cqooc.com/json/mooc/lessons"
             + f"?limit={limit}&start={start}&sortby=selfId&reverse=false"
             + f"&courseId={course_id}&ts={self.__get_ts()}"
         )
@@ -45,53 +45,59 @@ class ApiUrl:
         self, course_id: str, username: str, start: int = 0, limit: int = 100
     ) -> str:
         return (
-            "http://www.cqooc.com/json/learnLogs"
+            "https://www.cqooc.com/json/learnLogs"
             + f"?limit={limit}&start={start}&courseId={course_id}"
             + f"&select=sectionId&username={username}&ts={self.__get_ts()}"
         )
 
     def mcs_id_api(self, owner_id: str, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/mcs"
+            "https://www.cqooc.com/json/mcs"
             + f"?ownerId={owner_id}&courseId={course_id}"
             + f"&ts={self.__get_ts()}"
         )
 
     def learn_log_api(self, section_id: str, username: str) -> str:
         return (
-            "http://www.cqooc.com/json/learnLogs"
+            "https://www.cqooc.com/json/learnLogs"
             + f"?sectionId={section_id}&username={username}"
             + f"&ts={self.__get_ts()}"
         )
 
     def exam_paper_api(self, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/exam/papers"
+            "https://www.cqooc.com/json/exam/papers"
             + f"?limit=200&start=1&courseId={course_id}&select=id,title,parentId,submitEnd"
               f"&ts={self.__get_ts()}"
         )
 
     def exam_main_api(self, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/exams"
+            "https://www.cqooc.com/json/exams"
             + f"?limit=200&start=1&courseId={course_id}&select=id,title,parentId,submitEnd"
               f"&ts={self.__get_ts()}"
         )
 
     def task_list_api(self, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/tasks"
+            "https://www.cqooc.com/json/tasks"
             + f"?limit=200&start=1&isPublish=1&courseId={course_id}&select=id,title,pubClass,submitEnd"
             + f"&ts={self.__get_ts()}"
         )
 
     def chapters_api(self, course_id: str) -> str:
         return (
-            "http://www.cqooc.com/json/chapters"
+            "https://www.cqooc.com/json/chapters"
             + f"?limit=200&start=1&isPublish=1&courseId={course_id}&select=id,title,parentId"
             + f"&ts={self.__get_ts()}"
         )
 
     @staticmethod
     def skip_section_api() -> str:
-        return "http://www.cqooc.com/learnLog/api/add"
+        return "https://www.cqooc.com/learnLog/api/add"
+
+    def paper_answer_api(self, paper_id: str) -> str:
+        return f'https://www.cqooc.com/json/test/result/search?testID={paper_id}&ts={self.__get_ts()}'
+
+    def paper_info_api(self, paper_id: str) -> str:
+        return f"https://www.cqooc.com/test/api/paper/get?id={paper_id}&ts={self.__get_ts()}"

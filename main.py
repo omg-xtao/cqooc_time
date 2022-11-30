@@ -54,7 +54,7 @@ while 1:
         # 获取考试列表
         exams_main = core.get_exam_main_info(course_id)
         [all_exams.append(i) for i in exams_main.get("data", [])]
-        exam_list = get_exam_list(all_exams, chapters.get("data", []))
+        exam_list = get_exam_list(core, course_id, all_exams, chapters.get("data", []))
         tasks = core.get_task_info(course_id)
         task_list = get_task_list(tasks.get("data", []))
         # 导出
