@@ -33,7 +33,7 @@ class Core:
         nonce_res = self.__request.do_get(
             api,
             {
-                "Referer": "http://www.cqooc.com/login",
+                "Referer": "https://www.cqooc.com/login",
             },
         )
         data = nonce_res.json()
@@ -46,7 +46,7 @@ class Core:
                 self.__user.get_username(), hash_str, data["nonce"], cn
             ),
             headers={
-                "Referer": "http://www.cqooc.com/login",
+                "Referer": "https://www.cqooc.com/login",
             },
         )
         data = login_res.json()
@@ -72,7 +72,7 @@ class Core:
         course_res = self.__request.do_get(
             self.__api_url.course_api(str(self.__user.get_id()), limit),
             headers={
-                "Referer": "http://www.cqooc.com/my/learn",
+                "Referer": "https://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
             },
         )
@@ -84,7 +84,7 @@ class Core:
         mcs_id_res = self.__request.do_get(
             self.__api_url.mcs_id_api(str(self.__user.get_id()), course_id),
             headers={
-                "Referer": "http://www.cqooc.com/my/learn",
+                "Referer": "https://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
             },
         )
@@ -93,7 +93,7 @@ class Core:
         lessons_res = self.__request.do_get(
             self.__api_url.lessons_api(course_id),
             headers={
-                "Referer": "http://www.cqooc.com/learn"
+                "Referer": "https://www.cqooc.com/learn"
                 + f"/mooc/structure?id={course_id}",
                 "host": "www.cqooc.com",
             },
@@ -104,7 +104,7 @@ class Core:
             ),
             headers={
                 "Referer": (
-                    "http://www.cqooc.com/learn/mooc/progress"
+                    "https://www.cqooc.com/learn/mooc/progress"
                     + f"?id={course_id}"
                 ),
                 "host": "www.cqooc.com",
@@ -132,7 +132,7 @@ class Core:
             self.__api_url.skip_section_api(),
             data=post_data,
             headers={
-                "Referer": "http://www.cqooc.com/learn/mooc/structure?id="
+                "Referer": "https://www.cqooc.com/learn/mooc/structure?id="
                 + section_data["courseId"],
                 "Host": "www.cqooc.com",
             },
@@ -151,7 +151,7 @@ class Core:
         exam_list_res = self.__request.do_get(
             self.__api_url.exam_paper_api(course_id),
             headers={
-                "Referer": "http://www.cqooc.com/my/learn",
+                "Referer": "https://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
             },
         )
@@ -163,7 +163,7 @@ class Core:
         exam_list_res = self.__request.do_get(
             self.__api_url.exam_main_api(course_id),
             headers={
-                "Referer": f"http://www.cqooc.com/learn/mooc/structure?id={course_id}",
+                "Referer": f"https://www.cqooc.com/learn/mooc/structure?id={course_id}",
                 "Host": "www.cqooc.com",
             },
         )
@@ -175,7 +175,7 @@ class Core:
         task_list_res = self.__request.do_get(
             self.__api_url.task_list_api(course_id),
             headers={
-                "Referer": "http://www.cqooc.com/my/learn",
+                "Referer": "https://www.cqooc.com/my/learn",
                 "Host": "www.cqooc.com",
             },
         )
@@ -187,7 +187,7 @@ class Core:
         chapter_list_res = self.__request.do_get(
             self.__api_url.chapters_api(course_id),
             headers={
-                "Referer": f"http://www.cqooc.com/learn/mooc/progress?id={course_id}",
+                "Referer": f"https://www.cqooc.com/learn/mooc/progress?id={course_id}",
                 "Host": "www.cqooc.com",
             },
         )
@@ -199,7 +199,7 @@ class Core:
         paper_res = self.__request.do_get(
             self.__api_url.paper_answer_api(paper_id),
             headers={
-                "Referer": f'http://www.cqooc.com/learn/mooc/testing/do?tid='
+                "Referer": f'https://www.cqooc.com/learn/mooc/testing/do?tid='
                            f'{paper_id}&id={course_id}',
                 "Host": "www.cqooc.com",
             },
@@ -212,7 +212,7 @@ class Core:
         paper_res = self.__request.do_get(
             self.__api_url.paper_info_api(paper_id),
             headers={
-                "Referer": f'http://www.cqooc.com/learn/mooc/testing/do?tid='
+                "Referer": f'https://www.cqooc.com/learn/mooc/testing/do?tid='
                            f'{paper_id}&id={course_id}',
                 "Host": "www.cqooc.com",
             },

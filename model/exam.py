@@ -22,6 +22,8 @@ class Exam:
         self.answer = ""
 
     def parse_answer(self, body, data):
+        if not body:
+            return
         # 题目顺序
         new_list = []
         new_list_pan = []
@@ -80,6 +82,7 @@ def get_exam_list(core, course_id: str, exams: List[dict], chapters: List[dict])
             exam_.chapter = get_title(exam_.parentId, chapters)
             exam_list.append(exam_)
         except Exception as e:  # noqa
+            print(f"解析答案失败：{exam.get('title', '')}")
             print(traceback.format_exc())
             continue
     return exam_list
