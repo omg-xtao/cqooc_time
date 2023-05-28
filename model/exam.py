@@ -12,14 +12,16 @@ class Exam:
     submitEnd: int = 0
     end_time: str = ""
     answer: str = ""
+    course_title: str = ""
 
-    def __init__(self, data: dict):
+    def __init__(self, data: dict, course_title: str):
         self.id = data.get("id", "0")
         self.title = data.get("title", "")
         self.parentId = data.get("parentId", "0")
         self.submitEnd = data.get("submitEnd", 0) / 1000
         self.end_time = datetime.strftime(datetime.fromtimestamp(self.submitEnd), '%Y-%m-%d %H:%M:%S')
         self.answer = ""
+        self.course_title = course_title
 
     def parse_answer(self, body, data):
         if not body:
@@ -67,18 +69,21 @@ def get_title(chapter_id: str, chapters: List[dict]) -> str:
     return ""
 
 
-def get_exam_list(core, course_id: str, exams: List[dict], chapters: List[dict]) -> List[Exam]:
+def get_exam_list(
+        core, course_id: str, exams: List[dict], chapters: List[dict], get_answer: bool, course_title: str,
+) -> List[Exam]:
     exam_list = []
     for exam in exams:
         try:
-            exam_ = Exam(exam)
-            info = core.get_paper_info(course_id, exam_.id)
-            if info.get("body", 0) != 0:
-                answer = core.get_paper_answer(course_id, exam_.id)
-                if answer.get("code", 0) == 200:
-                    exam_.parse_answer(info["body"], answer.get("data", {}))
-                sleep(.5)
-            print("ok")
+            exam_ = Exam(exam, course_title)
+            if get_answer:
+                info = core.get_paper_info(course_id, exam_.id)
+                if info.get("body", 0) != 0:
+                    answer = core.get_paper_answer(course_id, exam_.id)
+                    if answer.get("code", 0) == 200:
+                        exam_.parse_answer(info["body"], answer.get("data", {}))
+                    sleep(.5)
+                print("ok")
             exam_.chapter = get_title(exam_.parentId, chapters)
             exam_list.append(exam_)
         except Exception as e:  # noqa
