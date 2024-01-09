@@ -24,11 +24,10 @@ def html_to_text(html: str) -> str:
 
 def export_danxuan(question: DanXuanQuestion) -> Tuple[str, str]:
     title = html_to_text(question.question)
-    choices = [html_to_text(i) for i in question.body.choices]
     answer = question.body.answer
     answer_text = danxuan_answer_map.get(answer[0])
     text = f"{title}\n"
-    for idx, choice in enumerate(choices):
+    for idx, choice in enumerate(question.body.choices):
         text += f"{danxuan_answer_map.get(idx)}. {choice}\n"
     text_answer = f"{text}\n答案：{answer_text}\n"
     if question.resolution:
