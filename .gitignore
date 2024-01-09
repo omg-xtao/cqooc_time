@@ -154,3 +154,5 @@ cython_debug/
 
 *.xlsx
 config.py
+plugins/
+*.txt

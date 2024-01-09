@@ -46,3 +46,13 @@ class Core(BaseCore):
         return Msg().processing(
             "获取成功", 200, paper_res.json()
         )
+
+    def get_course(self, limit: int = 20) -> dict:
+        course_res = self.__request.do_get(
+            self.__api_url.course_api(self.__user.get_id(), limit),
+            headers={
+                "Referer": "http://www.cqooc.com/my/learn",
+                "Host": "www.cqooc.com",
+            },
+        )
+        return Msg().processing("获取课程成功", 200, course_res.json())

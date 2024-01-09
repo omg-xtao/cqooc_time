@@ -1,24 +1,13 @@
 from typing import List, Union
 
-from coloredlogs import ColoredFormatter
-from logging import getLogger, StreamHandler, CRITICAL, INFO, basicConfig
 from sys import exit
 
 from defs.core import Core
 from defs.export import export_exam_list, export_exam_total
+from logs import logs
 from model.course import get_course_list, print_course_list
 from model.exam import get_exam_list, Exam
 from model.task import get_task_list, Task
-
-logs = getLogger(__name__)
-logging_format = "%(levelname)s [%(asctime)s] [%(name)s] %(message)s"
-logging_handler = StreamHandler()
-logging_handler.setFormatter(ColoredFormatter(logging_format))
-root_logger = getLogger()
-root_logger.setLevel(CRITICAL)
-root_logger.addHandler(logging_handler)
-basicConfig(level=INFO)
-logs.setLevel(INFO)
 
 core = Core("", "")
 sid = input("请输入 sid：")

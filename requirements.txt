@@ -1,3 +1,6 @@
 coloredlogs==15.0.1
 openpyxl==3.1.2
 hackcqooc==0.0.10
+tqdm
+beautifulsoup4
+lxml
